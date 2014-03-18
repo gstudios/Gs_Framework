@@ -11,9 +11,9 @@ class Autoload {
 	public function __construct(){
 
 		set_include_path(get_include_path().PATH_SEPARATOR.realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'app'));
-		set_include_path(get_include_path().PATH_SEPARATOR.realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'config'));
 		set_include_path(get_include_path().PATH_SEPARATOR.realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'controller'));
 		set_include_path(get_include_path().PATH_SEPARATOR.realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'model'));
+		set_include_path(get_include_path().PATH_SEPARATOR.realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'utils'));
 
 		//var_dump(get_include_path());
 

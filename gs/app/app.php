@@ -18,6 +18,14 @@ class App {
 		var_dump(APP_PATH);
 
 		$this->registry->config = Config::getConfig();
+
+		// A Faire : verifier si le tableau database_pdo est conforme
+
+		DataBase::configure($this->registry->config['database_pdo']);
+
+		$this->registry->db = DataBase::instancie();
+
+		return $this;
 	}
 
 	function run(){
@@ -34,9 +42,12 @@ class App {
 		}catch(Exception $e){
 
 		}
+
+		return $this;
 	}
 
 	function stop(){
 		var_dump($this->registry->config);
+		var_dump($this->registry->db);
 	}
 }

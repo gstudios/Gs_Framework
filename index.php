@@ -13,8 +13,4 @@ new Autoload();
 
 $app = new App();
 
-$app->start();
-
-$app->run();
-
-$app->stop();
+$app->start()->run()->stop();
