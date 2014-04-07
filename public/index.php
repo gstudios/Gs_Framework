@@ -6,8 +6,10 @@
  * @author galbanie <galbanie at setrukmarcroger@gmail.com>
  */
 
-require dirname(__FILE__).'/gs/constante.php';
-require dirname(__FILE__).'/gs/autoloader.php';
+var_dump($_SERVER);
+
+require dirname(__FILE__).'/../gs/constante.php';
+require dirname(__FILE__).'/../gs/autoloader.php';
 
 new Autoload();
 

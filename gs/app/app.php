@@ -25,23 +25,24 @@ class App {
 
 		$this->registry->db = DataBase::instancie();
 
+		$this->registry->route = new Route();
+
 		return $this;
 	}
 
 	function run(){
-		try{
-			/*
-			/ Applications des filtres
-			*/
-			require APP_PATH.'filters.php';
-			/*
-			/ Application des routes
-			*/
-			require APP_PATH.'routes.php';
+		
+		/*
+		/ Applications des filtres
+		*/
+		require APP_PATH.'filters.php';
 
-		}catch(Exception $e){
-
-		}
+		/*
+		/ Application des routes
+		*/
+		$route = $this->registry->route;
+		require APP_PATH.'routes.php';
+		$this->registry->route->run();
 
 		return $this;
 	}
@@ -49,5 +50,6 @@ class App {
 	function stop(){
 		var_dump($this->registry->config);
 		var_dump($this->registry->db);
+		var_dump($this->registry->route);
 	}
 }

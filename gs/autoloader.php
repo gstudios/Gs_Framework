@@ -10,12 +10,21 @@ class Autoload {
 
 	public function __construct(){
 
+
+		/*
+		* Include Gs
+		*/
 		set_include_path(get_include_path().PATH_SEPARATOR.realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'app'));
 		set_include_path(get_include_path().PATH_SEPARATOR.realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'controller'));
 		set_include_path(get_include_path().PATH_SEPARATOR.realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'model'));
 		set_include_path(get_include_path().PATH_SEPARATOR.realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'utils'));
 
-		//var_dump(get_include_path());
+		/*
+		* Include App User
+		*/
+		set_include_path(get_include_path().PATH_SEPARATOR.APP_PATH.'controller');
+
+		//var_dump(APP_PATH.'controller');
 
 		spl_autoload_register(array('Autoload','autoload'));
 	}

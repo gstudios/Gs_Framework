@@ -6,7 +6,7 @@
  * @author galbanie <galbanie at setrukmarcroger@gmail.com>
  */
 
-define('RACINE_PATH',realpath(dirname($_SERVER['SCRIPT_FILENAME'])).DIRECTORY_SEPARATOR);
+define('RACINE_PATH',realpath(dirname(dirname($_SERVER['SCRIPT_FILENAME']))).DIRECTORY_SEPARATOR);
 
 define('APP_PATH',RACINE_PATH.'app'.DIRECTORY_SEPARATOR);
 
@@ -18,6 +18,6 @@ if(file_exists($config_file_path)){
 	define('CONFIG_FILE_PATH',$config_file_path);
 }
 else{
-	throw new Exception("Fichier config inexistant [".$config_file_path."]", 1);
+	throw new Exception("Le Fichier de configuiration est inexistant [".$config_file_path."]", 1);
 }
 
