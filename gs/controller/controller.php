@@ -7,5 +7,15 @@
  */
 
 class Controller {
-	
+
+	protected $_model = null;
+	protected $_layout = null;
+
+	public function getModel(){
+		return $this->_model;
+	}
+
+	public function getLayout(){
+		return $this->_layout;
+	}
 }

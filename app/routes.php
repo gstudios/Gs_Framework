@@ -14,14 +14,16 @@ function login(){
 	echo '<html><body style="background-color : #ccc;"><div><form><label>Username : <input type="text"></label></form></div></body></html>';
 }
 
-$route->get('/',function(){
-	echo '<html><body style="background-color : #ccc;">Work !</body></html>';
+$route->get('/','HomeController@index');
+
+$route->get('about',function(){
+	echo '<h1>About</h1>';
 });
 
-$route->get('/about','about@index');
-
-$route->post('/contact','contact');
-
-$route->get('/contact','Contact@index');
+$route->post('contact','contact');
 
 $route->request('login','login');
+
+$route->request('{id}','UserController@show');
+
+$route->request('{identifiant}','UserController@index');
