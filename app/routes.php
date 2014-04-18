@@ -14,9 +14,17 @@ function login(){
 	echo '<html><body style="background-color : #ccc;"><div><form><label>Username : <input type="text"></label></form></div></body></html>';
 }
 
-$route->get('/','HomeController@index');
+//$route->get('/','HomeController@index');
+
+$route->get('/', function($view){
+	View::set('title','Gs_Framework');
+	var_dump(View::make('dir.home'));
+	return View::make('dir.home');
+	//echo $view->make('home');
+});
 
 $route->get('about',function(){
+	//View::show(5);
 	echo '<h1>About</h1>';
 });
 

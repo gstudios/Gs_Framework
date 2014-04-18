@@ -5,13 +5,15 @@ class Route {
 	private $_route = array();
 	private $_method = array();
 	private $_function = array();
+	private $_parameters = array();
+
+	/*public function __construct(){
+		$this->_parameters[0] = new Route();
+	}*/
 
 	private function add($route, $method = 'GET', $function = null){
-
 		$this->_route[] = '/'.trim($route,'/');
-
 		$this->_method[] = $method;
-
 		$this->_function[] = $function;
 	}
 
@@ -24,16 +26,17 @@ class Route {
 		//preg_match_all('/\{(\w+?)\?\}/', $uri, $matches);
 
 		//var_dump($matches);
-		$txt='{id}';
+		//$txt='{id}';
 
   		$re1='(\\{.*?\\})';	# Curly Braces 1
-  		$re2='((?:[a-z][a-z]+))';	# Word 1
+  		//$re2='((?:[a-z][a-z]+))';	# Word 1
 
   		//preg_match_all ("/".$re1."/is", $txt, $matches);
   		//var_dump($matches);
 
-  		$model = array("galbanie", "rosine");
-  		$parametres = null;
+  		//$model = array("galbanie", "rosine");
+  		//$parametres = array();
+  		//$this->_parameters[] = new Route();
 
 		foreach ($this->_route as $key => $value) {
 			if( $_SERVER['REQUEST_METHOD'] == $this->_method[$key] || $this->_method[$key] == 'REQUEST'){
@@ -42,29 +45,47 @@ class Route {
 				preg_match_all ("/".$re1."/is", $value, $matches);
 				//var_dump($matches);
 				if (isset($matches[1])){
-					foreach ($model as $keyModel => $valueModel) {
+
+					//$index = $matches[1];
+
+					$this->_parameters[] = rtrim(trim($uri,'/'),'/');
+					$value = preg_replace("/".$re1."/is", $this->_parameters[0], $value);
+
+					if(!is_callable($this->_function[$key])){
+						$ctrl_fn = explode('@', $this->_function[$key]);
+						$ctrl = $this->getController($ctrl_fn[0]);
+						if(!is_null($ctrl)) {
+							$model = $ctrl->getModel();
+							if(!is_null($model)){
+
+							}
+						}
+					}
+					
+					/*foreach ($model as $keyModel => $valueModel) {
 						if(preg_match('#^'.$valueModel.'$#', trim($uri,'/'))){
 							$value = preg_replace("/".$re1."/is", $valueModel, $value);
 							$parametres = $valueModel;
 						}
 						
-					}
+					}*/
 					
 				}
 
 				if(preg_match('#^'.$value.'$#', $uri)){
-					$this->call_fn($this->_function[$key],$parametres);
-					break;
+					return $this->call_fn($this->_function[$key]);
+					//break;
 				}
 				
 			}
 		}
 	}
 
-	private function call_fn($callable,$params = null){
+	private function call_fn($callable){
+
 		if(is_callable($callable)){
 
-			call_user_func($callable,$params);
+			return call_user_func_array($callable,$this->_parameters);
 
 		}else {
 
@@ -81,7 +102,7 @@ class Route {
 			if(!is_null($ctrl)){
 				if(isset($ctrl_fn[1])){
 					if(is_callable(array($ctrl, $ctrl_fn[1]))){
-						call_user_func(array($ctrl, $ctrl_fn[1]),$params);
+						return call_user_func_array(array($ctrl, $ctrl_fn[1]),$this->_parameters);
 
 					}
 					else{

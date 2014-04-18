@@ -41,8 +41,10 @@ class App {
 		/ Application des routes
 		*/
 		$route = $this->registry->route;
+		//$view = $this->registry->view;
 		require APP_PATH.'routes.php';
-		$this->registry->route->run();
+		$view = $this->registry->route->run();
+		View::show($view);
 
 		return $this;
 	}

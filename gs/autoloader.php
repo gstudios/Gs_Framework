@@ -17,7 +17,9 @@ class Autoload {
 		set_include_path(get_include_path().PATH_SEPARATOR.realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'app'));
 		set_include_path(get_include_path().PATH_SEPARATOR.realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'controller'));
 		set_include_path(get_include_path().PATH_SEPARATOR.realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'model'));
+		set_include_path(get_include_path().PATH_SEPARATOR.realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'routing'));
 		set_include_path(get_include_path().PATH_SEPARATOR.realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'utils'));
+		set_include_path(get_include_path().PATH_SEPARATOR.realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'view'));
 
 		/*
 		* Include App User
