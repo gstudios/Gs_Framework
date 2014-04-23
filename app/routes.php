@@ -18,14 +18,15 @@ function login(){
 
 $route->get('/', function($view){
 	View::set('title','Gs_Framework');
-	var_dump(View::make('dir.home'));
-	return View::make('dir.home');
+	var_dump(View::make('home'));
+	return View::make('home');
 	//echo $view->make('home');
 });
 
 $route->get('about',function(){
 	//View::show(5);
-	echo '<h1>About</h1>';
+	//echo '<h1>About</h1>';
+	return '<h1>About</h1>';
 });
 
 $route->post('contact','contact');

@@ -21,7 +21,7 @@ class Route {
 
 		$uri = isset($_REQUEST['uri']) ? '/'.rtrim($_REQUEST['uri'],'/') : '/';
 
-		//var_dump($uri);
+		var_dump($uri);
 
 		//preg_match_all('/\{(\w+?)\?\}/', $uri, $matches);
 
@@ -43,13 +43,14 @@ class Route {
 
 
 				preg_match_all ("/".$re1."/is", $value, $matches);
-				//var_dump($matches);
+				//var_dump($matches[1]);
 				if (isset($matches[1])){
 
 					//$index = $matches[1];
 
-					$this->_parameters[] = rtrim(trim($uri,'/'),'/');
+					$this->_parameters = explode('/',rtrim(trim($uri,'/'),'/'));
 					$value = preg_replace("/".$re1."/is", $this->_parameters[0], $value);
+					//var_dump($value);
 
 					if(!is_callable($this->_function[$key])){
 						$ctrl_fn = explode('@', $this->_function[$key]);
@@ -71,7 +72,7 @@ class Route {
 					}*/
 					
 				}
-
+				//var_dump(preg_match('#^'.$value.'$#', $uri,$matches,PREG_OFFSET_CAPTURE));
 				if(preg_match('#^'.$value.'$#', $uri)){
 					return $this->call_fn($this->_function[$key]);
 					//break;
