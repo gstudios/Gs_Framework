@@ -7,9 +7,9 @@ class Route {
 	private $_function = array();
 	private $_parameters = array();
 
-	/*public function __construct(){
-		$this->_parameters[0] = new Route();
-	}*/
+	public function __construct(){
+		
+	}
 
 	private function add($route, $method = 'GET', $function = null){
 		$this->_route[] = '/'.trim($route,'/');

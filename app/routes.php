@@ -20,7 +20,7 @@ $route->get('/', function($view){
 	View::set('title','Gs_Framework');
 	var_dump(View::make('home'));
 	return View::make('home');
-	//echo $view->make('home');
+	//echo View::make('home');
 });
 
 $route->get('about',function(){
